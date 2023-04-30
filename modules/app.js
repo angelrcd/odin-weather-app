@@ -5,6 +5,7 @@ export const AppData = (function () {
   let temperatureType = "celsius";
   let _locationData = null;
   let _currentData = null;
+  let _forecastWeek = [];
 
   const toggleTemperatureType = () => {
     temperatureType = temperatureType === "celsius" ? "farenheit" : "celsius";
@@ -42,7 +43,7 @@ class LocationData {
   }
 
   getCurrentDate() {
-    return this.localTime.format("DD/MM/YYYY");
+    return this.localTime.format("DD MMMM, dddd");
   }
 }
 
@@ -63,13 +64,14 @@ class CurrentWeatherData {
       code: currentFetchData.condition.code,
     };
     this.windData = {
-      speed_mph: currentFetchData.wind_mph,
       speed_kph: currentFetchData.wind_kph,
       degree: currentFetchData.wind_degree,
       direction: currentFetchData.wind_dir,
     };
     this.humidity = currentFetchData.humidity;
     this.precipitation = currentFetchData.precip_mm;
+    this.cloud = currentFetchData.cloud;
+    this.pressure = currentFetchData.pressure_mb;
   }
 
   get temperature() {
@@ -79,6 +81,10 @@ class CurrentWeatherData {
   get feelsLike() {
     return this._feelsLike[AppData.temperatureType];
   }
+}
+
+class forecastDay {
+  constructor(forecastDayFetchData) {}
 }
 
 class Temperature {
