@@ -23,6 +23,7 @@ async function getWeatherForecast(location) {
     renderDisplay();
     console.log(AppData.getForecastWeekArr());
   } catch (error) {
+    AppData.isLoading = false;
     console.error(error);
   }
 }

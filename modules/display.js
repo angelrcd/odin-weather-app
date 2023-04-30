@@ -25,7 +25,7 @@ function renderCurrentInfoRow() {
   const currentData = AppData.getCurrentWeatherData();
 
   const fragment = document.createDocumentFragment();
-  const currentRow = document.createElement("div");
+  const currentRow = document.createElement("section");
   currentRow.classList.add("main-row");
   currentRow.innerHTML = `
     <div class="current-main">
@@ -66,7 +66,6 @@ function renderCurrentInfoRow() {
 function renderForecastWeekTable() {
   const tempUnit = AppData.temperatureType === "celsius" ? "ºC" : "ºF";
   const forecastWeekArr = AppData.getForecastWeekArr();
-
   const table = document.createElement("table");
   table.classList.add("week-forecast-table");
   const tHeadRow = table.createTHead();
@@ -91,7 +90,10 @@ function renderForecastWeekTable() {
     tBody.appendChild(getDataDayTableRow(dataDay));
   }
 
-  appBody.appendChild(table);
+  const weekForecastSection = document.createElement("section");
+  weekForecastSection.classList.add("week-info-row");
+  weekForecastSection.appendChild(table);
+  appBody.appendChild(weekForecastSection);
 }
 
 function getDataDayTableRow(dataDay) {

@@ -10,6 +10,7 @@
   --primary-color : #EA6D4A;
   --background-main : #343A40;
   --background-secondary : #F5F7FD;
+  --background-secondary-darker : #ebedf3;
   --color-cold : #0284c7;
   --color-hot : #dc2626;
 }
@@ -216,8 +217,14 @@ header {
 }
 
 /* Forecast week table */
+.week-info-row {
+  overflow-x: auto;
+}
+
 .week-forecast-table {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  border-right: 1px solid #cbd5e1;
   border-collapse: collapse;
 }
 
@@ -234,6 +241,10 @@ th:not(.empty-cell) {
 
 .week-forecast-table td {
   border-bottom: 1px solid #cbd5e1;
+}
+
+.week-forecast-table tbody tr:nth-child(even){
+  background: var(--background-secondary-darker);
 }
 
     /* Cells alignment */
@@ -255,6 +266,7 @@ th:not(.empty-cell) {
 
 .week-forecast-table .icon-cell img{
   margin: 0 auto;
+  min-width: 50px;
 }
 
 .week-forecast-table tbody td:nth-child(6) {
