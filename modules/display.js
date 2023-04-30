@@ -12,6 +12,7 @@ export default function renderDisplay() {
   }
 
   renderCurrentInfoRow();
+  renderForecastWeekTable();
 }
 
 function renderLoad() {
@@ -19,6 +20,7 @@ function renderLoad() {
 }
 
 function renderCurrentInfoRow() {
+  const tempUnit = AppData.temperatureType === "celsius" ? "ºC" : "ºF";
   const locationData = AppData.getLocationData();
   const currentData = AppData.getCurrentWeatherData();
 
@@ -30,8 +32,8 @@ function renderCurrentInfoRow() {
       <p>${locationData.getCurrentDate()}</p>
       <h2>${locationData.name}</h2>
       <img src="${currentData.condition.icon}" alt="">
-      <p>${currentData.temperature}</p>
-      <p>feels like: ${currentData.feelsLike}</p>
+      <p>${currentData.temperature}${tempUnit}</p>
+      <p>feels like: ${currentData.feelsLike}${tempUnit}</p>
       <p>${currentData.condition.text}</p>
     </div>
     <div class="current-secondary">
@@ -59,4 +61,58 @@ function renderCurrentInfoRow() {
   `;
   fragment.appendChild(currentRow);
   appBody.appendChild(fragment);
+}
+
+function renderForecastWeekTable() {
+  const tempUnit = AppData.temperatureType === "celsius" ? "ºC" : "ºF";
+  const forecastWeekArr = AppData.getForecastWeekArr();
+
+  const table = document.createElement("table");
+  table.classList.add("week-forecast-table");
+  const tHeadRow = table.createTHead();
+  tHeadRow.innerHTML = `
+  <tr>
+    <th rowspan="2" class="empty-cell"></th>
+    <th rowspan="2""></th>
+    <th rowspan="2">Rain (%)</th>
+    <th rowspan="2">Snow (%)</th>
+    <th rowspan="2">Humidity (%)</th>
+    <th colspan="3" scope="colgroup">Temperature (${tempUnit})</th>
+  </tr>
+  <tr>
+    <th scope="col">Min</th>
+    <th scope="col">Avg<br></th>
+    <th scope="col">Max</th>
+  </tr>
+  `;
+
+  const tBody = table.createTBody();
+  for (const dataDay of forecastWeekArr) {
+    tBody.appendChild(getDataDayTableRow(dataDay));
+  }
+
+  appBody.appendChild(table);
+}
+
+function getDataDayTableRow(dataDay) {
+  const tRow = document.createElement("tr");
+  const thDay = document.createElement("th");
+  thDay.innerText = dataDay.day;
+  tRow.appendChild(thDay);
+
+  const iconCell = tRow.insertCell();
+  iconCell.classList.add("icon-cell");
+  const img = new Image();
+  img.src = dataDay.condition.icon;
+  img.alt = dataDay.condition.text;
+  iconCell.appendChild(img);
+
+  tRow.insertCell().innerText = dataDay.rainChance;
+  tRow.insertCell().innerText = dataDay.snowChance;
+  tRow.insertCell().innerText = dataDay.avgHumidity;
+  tRow.insertCell().innerText = dataDay.minTemp;
+  tRow.insertCell().innerText = dataDay.avgTemp;
+  tRow.insertCell().innerText = dataDay.maxTemp;
+
+  return tRow;
 }

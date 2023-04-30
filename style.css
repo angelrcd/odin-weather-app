@@ -10,6 +10,8 @@
   --primary-color : #EA6D4A;
   --background-main : #343A40;
   --background-secondary : #F5F7FD;
+  --color-cold : #0284c7;
+  --color-hot : #dc2626;
 }
 
 * {
@@ -174,6 +176,7 @@ header {
   display: flex;
   gap: calc(10vw);
   padding: 0 calc(10vw);
+  margin-bottom: 2rem;
 }
 
 .current-main {
@@ -211,3 +214,54 @@ header {
     align-items: center;
   }
 }
+
+/* Forecast week table */
+.week-forecast-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th:not(.empty-cell) {
+  background: var(--background-main);
+  color: var(--background-secondary);
+}
+
+
+.week-forecast-table th, .week-forecast-table td {
+  /* border: 1px solid black; */
+  padding: 0 1rem;
+}
+
+.week-forecast-table td {
+  border-bottom: 1px solid #cbd5e1;
+}
+
+    /* Cells alignment */
+    .week-forecast-table tbody th:nth-child(1){
+      text-align: left;
+    }
+
+    .week-forecast-table tbody td,
+    .week-forecast-table th {
+      text-align: right;
+    }
+    .week-forecast-table th[scope="colgroup"]{
+      text-align: center;
+    }
+
+.week-forecast-table .empty-cell {
+  border: none;
+}
+
+.week-forecast-table .icon-cell img{
+  margin: 0 auto;
+}
+
+.week-forecast-table tbody td:nth-child(6) {
+  color: var(--color-cold);
+}
+
+.week-forecast-table tbody td:nth-child(8) {
+  color: var(--color-hot);
+}
+

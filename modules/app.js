@@ -14,6 +14,11 @@ export const AppData = (function () {
   const setAppData = (fetchJson) => {
     _locationData = new LocationData(fetchJson.location);
     _currentData = new CurrentWeatherData(fetchJson.current);
+
+    _forecastWeek.length = 0;
+    for (const dayData of fetchJson.forecast.forecastday) {
+      _forecastWeek.push(new ForecastDay(dayData));
+    }
   };
 
   const getLocationData = () => {
@@ -24,6 +29,10 @@ export const AppData = (function () {
     return _currentData;
   };
 
+  const getForecastWeekArr = () => {
+    return _forecastWeek;
+  };
+
   return {
     isLoading,
     temperatureType,
@@ -31,6 +40,7 @@ export const AppData = (function () {
     setAppData,
     getLocationData,
     getCurrentWeatherData,
+    getForecastWeekArr,
   };
 })();
 
@@ -83,13 +93,53 @@ class CurrentWeatherData {
   }
 }
 
-class forecastDay {
-  constructor(forecastDayFetchData) {}
+class ForecastDay {
+  constructor(forecastDayFetchData) {
+    this._day = dayjs(forecastDayFetchData.date, "YYYY-MM-DD");
+    this._maxTemp = new Temperature(
+      forecastDayFetchData.day.maxtemp_c,
+      forecastDayFetchData.day.maxtemp_f
+    );
+    this._minTemp = new Temperature(
+      forecastDayFetchData.day.mintemp_c,
+      forecastDayFetchData.day.mintemp_f
+    );
+    this._avgTemp = new Temperature(
+      forecastDayFetchData.day.avgtemp_c,
+      forecastDayFetchData.day.avgtemp_f
+    );
+
+    this.avgHumidity = forecastDayFetchData.day.avghumidity;
+    this.rainChance = forecastDayFetchData.day.daily_chance_of_rain;
+    this.snowChance = forecastDayFetchData.day.daily_chance_of_snow;
+
+    this.condition = {
+      text: forecastDayFetchData.day.condition.text,
+      icon: forecastDayFetchData.day.condition.icon,
+      code: forecastDayFetchData.day.condition.code,
+    };
+  }
+
+  get day() {
+    return this._day.format("DD MMMM, dddd");
+  }
+
+  get maxTemp() {
+    return this._maxTemp[AppData.temperatureType];
+  }
+
+  get minTemp() {
+    return this._minTemp[AppData.temperatureType];
+  }
+
+  get avgTemp() {
+    return this._avgTemp[AppData.temperatureType];
+  }
 }
 
 class Temperature {
   constructor(c, f) {
-    this.celsius = c + "ºC";
-    this.farenheit = f + "ºF";
+    this.celsius = c;
+    this.farenheit = f;
   }
 }
