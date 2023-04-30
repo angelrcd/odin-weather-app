@@ -1,12 +1,13 @@
 import dayjs from "dayjs";
 
 export const AppData = (function () {
-  let _temperatureType = "celsius";
+  let isLoading = true;
+  let temperatureType = "celsius";
   let _locationData = null;
   let _currentData = null;
 
   const toggleTemperatureType = () => {
-    _temperatureType = _temperatureType === "celsius" ? "farenheit" : "celsius";
+    temperatureType = temperatureType === "celsius" ? "farenheit" : "celsius";
   };
 
   const setAppData = (fetchJson) => {
@@ -23,6 +24,8 @@ export const AppData = (function () {
   };
 
   return {
+    isLoading,
+    temperatureType,
     toggleTemperatureType,
     setAppData,
     getLocationData,
@@ -45,11 +48,12 @@ class LocationData {
 
 class CurrentWeatherData {
   constructor(currentFetchData) {
-    this.temperature = new Temperature(
+    this._temperature = new Temperature(
       currentFetchData.temp_c,
       currentFetchData.temp_f
     );
-    this.feelsLike = new Temperature(
+
+    this._feelsLike = new Temperature(
       currentFetchData.feelslike_c,
       currentFetchData.feelslike_f
     );
@@ -64,6 +68,16 @@ class CurrentWeatherData {
       degree: currentFetchData.wind_degree,
       direction: currentFetchData.wind_dir,
     };
+    this.humidity = currentFetchData.humidity;
+    this.precipitation = currentFetchData.precip_mm;
+  }
+
+  get temperature() {
+    return this._temperature[AppData.temperatureType];
+  }
+
+  get feelsLike() {
+    return this._feelsLike[AppData.temperatureType];
   }
 }
 

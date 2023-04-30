@@ -39,7 +39,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 header {
   display: flex;
-  gap: 1rem;
+  gap: 1rem ;
   align-items: center;
   background: var(--background-main);
   padding: 0 2rem;
