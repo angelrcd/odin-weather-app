@@ -1,6 +1,7 @@
 import { AppData } from "./modules/app";
 import renderDisplay from "./modules/display";
 import LocalStorageController from "./modules/localStorageController";
+import { InfoPerHourController } from "./modules/displayInfoPerHour";
 
 const searchInput = document.querySelector(".search-bar-container input");
 const searchButton = document.querySelector(".search-bar-container button");
@@ -21,6 +22,8 @@ async function getWeatherForecast(location) {
     AppData.isLoading = false;
     LocalStorageController.setLastCity(location);
     renderDisplay();
+    setTableRowEventsListeners();
+
     console.log(AppData.getForecastWeekArr());
   } catch (error) {
     AppData.isLoading = false;
@@ -38,6 +41,18 @@ function setInitialTempType() {
   changeTempBtn.checked = temp === "farenheit";
 }
 
+function setTableRowEventsListeners() {
+  const weekInfoTableRows = document.querySelectorAll(
+    ".week-forecast-table tbody tr"
+  );
+  weekInfoTableRows.forEach((row) => {
+    row.addEventListener("click", (e) => {
+      const rowClicked = e.target.closest("tr");
+      InfoPerHourController.insertRow(rowClicked);
+    });
+  });
+}
+
 searchButton.addEventListener("click", () => {
   const searchValue = searchInput.value;
   getWeatherForecast(searchValue);
@@ -47,5 +62,6 @@ changeTempBtn.addEventListener("change", () => {
   const temp = changeTempBtn.checked ? "farenheit" : "celsius";
   AppData.temperatureType = temp;
   renderDisplay();
+  setTableRowEventsListeners();
   LocalStorageController.setTemperatureType(temp);
 });

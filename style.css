@@ -228,6 +228,10 @@ header {
   border-collapse: collapse;
 }
 
+.week-forecast-table tbody {
+  border: 1px solid #cbd5e1;
+}
+
 th:not(.empty-cell) {
   background: var(--background-main);
   color: var(--background-secondary);
@@ -240,11 +244,7 @@ th:not(.empty-cell) {
 }
 
 .week-forecast-table td {
-  border-bottom: 1px solid #cbd5e1;
-}
-
-.week-forecast-table tbody tr:nth-child(even){
-  background: var(--background-secondary-darker);
+  border: 1px solid #cbd5e1;
 }
 
     /* Cells alignment */
@@ -277,3 +277,20 @@ th:not(.empty-cell) {
   color: var(--color-hot);
 }
 
+/* Info by hour */
+.week-forecast-table tbody tr:hover:not(.info-by-hour, .selected) td{
+  background: var(--background-secondary-darker);
+  cursor: pointer;
+  border: none;
+}
+
+.week-forecast-table .selected td{
+  background: var(--background-secondary-darker);
+  border: none !important;
+}
+
+.info-by-hour td{
+  height: 200px;
+  background: var(--background-secondary-darker);
+  border: none;
+}

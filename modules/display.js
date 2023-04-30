@@ -86,8 +86,13 @@ function renderForecastWeekTable() {
   `;
 
   const tBody = table.createTBody();
+
+  let index = 0;
   for (const dataDay of forecastWeekArr) {
-    tBody.appendChild(getDataDayTableRow(dataDay));
+    const dayDataRow = getDataDayTableRow(dataDay);
+    dayDataRow.setAttribute("data-index", index);
+    tBody.appendChild(dayDataRow);
+    index++;
   }
 
   const weekForecastSection = document.createElement("section");
