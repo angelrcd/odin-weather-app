@@ -23,8 +23,6 @@ async function getWeatherForecast(location) {
     LocalStorageController.setLastCity(location);
     renderDisplay();
     setTableRowEventsListeners();
-
-    console.log(AppData.getForecastWeekArr());
   } catch (error) {
     AppData.isLoading = false;
     console.error(error);

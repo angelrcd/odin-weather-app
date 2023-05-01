@@ -118,6 +118,17 @@ class ForecastDay {
       icon: forecastDayFetchData.day.condition.icon,
       code: forecastDayFetchData.day.condition.code,
     };
+
+    this.hourlyData = {
+      tempArr: forecastDayFetchData.hour.map(
+        (obj) => new Temperature(obj.temp_c, obj.temp_f)
+      ),
+      feelsLikeArr: forecastDayFetchData.hour.map(
+        (obj) => new Temperature(obj.feelslike_c, obj.feelslike_f)
+      ),
+      rainChance: forecastDayFetchData.hour.map((obj) => obj.chance_of_rain),
+      snowChance: forecastDayFetchData.hour.map((obj) => obj.chance_of_snow),
+    };
   }
 
   get day() {

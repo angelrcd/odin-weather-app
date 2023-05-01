@@ -316,6 +316,9 @@ th:not(.empty-cell) {
 div.info-by-hour {
   background: var(--background-secondary-darker);
   text-align: left;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .info-by-hour.expand {
