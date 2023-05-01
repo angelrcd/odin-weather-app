@@ -278,19 +278,42 @@ th:not(.empty-cell) {
 }
 
 /* Info by hour */
-.week-forecast-table tbody tr:hover:not(.info-by-hour, .selected) td{
+.week-forecast-table tbody tr:hover:not(.info-by-hour) td{  
   background: var(--background-secondary-darker);
-  cursor: pointer;
   border: none;
+  cursor: pointer;
 }
+
+.week-forecast-table tbody tr:hover:not(.info-by-hour) td:nth-child(2){  
+  border-left: 1px solid #cbd5e1;
+}
+
 
 .week-forecast-table .selected td{
   background: var(--background-secondary-darker);
-  border: none !important;
+  border: none;
+}
+
+.selected td:nth-child(2){
+  border-left: 1px solid #cbd5e1;
 }
 
 .info-by-hour td{
-  height: 200px;
+  /* height: 200px; */
   background: var(--background-secondary-darker);
   border: none;
+  border-left: 1px solid #cbd5e1;
+}
+
+.info-by-hour {
+  height: 0;
+  transition: height 0.15s ease-out;
+  overflow: hidden;
+  background: #d5d5d5;
+  border: none;
+}
+
+.info-by-hour.expand {
+  height: 200px;
+  transition: height 0.15s ease-in;
 }

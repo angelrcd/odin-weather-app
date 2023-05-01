@@ -87,12 +87,16 @@ function renderForecastWeekTable() {
 
   const tBody = table.createTBody();
 
-  let index = 0;
   for (const dataDay of forecastWeekArr) {
     const dayDataRow = getDataDayTableRow(dataDay);
-    dayDataRow.setAttribute("data-index", index);
     tBody.appendChild(dayDataRow);
-    index++;
+
+    // Inserts hidden hour info row
+    const hourInfoRow = tBody.insertRow();
+    hourInfoRow.classList.add("info-by-hour");
+    const th = document.createElement("th");
+    hourInfoRow.appendChild(th);
+    hourInfoRow.insertCell().colSpan = 7;
   }
 
   const weekForecastSection = document.createElement("section");

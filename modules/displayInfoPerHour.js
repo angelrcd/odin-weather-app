@@ -1,27 +1,23 @@
 export class InfoPerHourController {
-  static insertRow(rowClicked) {
-    deleteAllHourInfoRows();
+  static async expandHourInfoRow(rowClicked) {
+    // Closes expanded hour info row if it's already open
+    if (rowClicked.nextSibling.classList.contains("expand")) {
+      collapseAllHourInfoRows();
+      return;
+    }
 
+    collapseAllHourInfoRows();
     rowClicked.classList.add("selected");
-    const rowHourInfo = document.createElement("tr");
 
-    const headerCell = document.createElement("th");
-    rowHourInfo.appendChild(headerCell);
-    const bodyCell = document.createElement("td");
-    bodyCell.colSpan = 7;
-    rowHourInfo.appendChild(bodyCell);
-
-    rowHourInfo.classList.add("info-by-hour");
-    rowClicked.insertAdjacentElement("afterend", rowHourInfo);
+    const rowHourInfo = rowClicked.nextSibling;
+    rowHourInfo.classList.add("expand");
   }
 }
 
-function deleteAllHourInfoRows() {
+function collapseAllHourInfoRows() {
   const allRows = document.querySelectorAll(".week-forecast-table tbody tr");
   allRows.forEach((row) => {
+    row.classList.remove("expand");
     row.classList.remove("selected");
-    if (row.classList.contains("info-by-hour")) {
-      row.remove();
-    }
   });
 }

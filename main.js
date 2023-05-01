@@ -48,7 +48,7 @@ function setTableRowEventsListeners() {
   weekInfoTableRows.forEach((row) => {
     row.addEventListener("click", (e) => {
       const rowClicked = e.target.closest("tr");
-      InfoPerHourController.insertRow(rowClicked);
+      InfoPerHourController.expandHourInfoRow(rowClicked);
     });
   });
 }
