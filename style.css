@@ -313,7 +313,12 @@ th:not(.empty-cell) {
   border: none;
 }
 
+div.info-by-hour {
+  background: var(--background-secondary-darker);
+  text-align: left;
+}
+
 .info-by-hour.expand {
-  height: 200px;
+  height: 300px;
   transition: height 0.15s ease-in;
 }

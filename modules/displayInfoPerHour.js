@@ -11,6 +11,7 @@ export class InfoPerHourController {
 
     const rowHourInfo = rowClicked.nextSibling;
     rowHourInfo.classList.add("expand");
+    rowHourInfo.children[1].children[0].classList.add("expand");
   }
 }
 
@@ -18,6 +19,7 @@ function collapseAllHourInfoRows() {
   const allRows = document.querySelectorAll(".week-forecast-table tbody tr");
   allRows.forEach((row) => {
     row.classList.remove("expand");
+    row.children[1].children[0].classList.remove("expand");
     row.classList.remove("selected");
   });
 }
