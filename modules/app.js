@@ -75,12 +75,10 @@ class CurrentWeatherData {
     this.condition = {
       text: currentFetchData.condition.text,
       icon: currentFetchData.condition.icon,
-      code: currentFetchData.condition.code,
     };
     this.windData = {
       speed_kph: currentFetchData.wind_kph,
       degree: currentFetchData.wind_degree,
-      direction: currentFetchData.wind_dir,
     };
     this.humidity = currentFetchData.humidity;
     this.precipitation = currentFetchData.precip_mm;

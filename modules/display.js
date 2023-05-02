@@ -32,38 +32,90 @@ function renderCurrentInfoRow() {
     <div class="current-main">
       <h3>${locationData.name}</h3>
       <div class="current-temp-container">
-        <p>${currentData.temperature}<span>${tempUnit}</span></p>
+        <p>
+          <span class="numeric-data">${currentData.temperature}</span>
+          <span class="unit">${tempUnit}</span>
+        </p>
         <img src="${currentData.condition.icon}" alt="">
       </div>
       <p class="current-condition-text">${currentData.condition.text}</p>
       <p>${locationData.getCurrentDate()}</p>
       <p>${locationData.getCurrentHour()}</p>
     </div>
-    <div class="current-secondary">
-      <div>
-        <p>Humidity (%)</p>
-        <p>${currentData.humidity}</p>
-      </div>
-      <div>
-        <p>Precipitation (mm)</p>
-        <p>${currentData.precipitation}</p>
-      </div>
-      <div>
-        <p>Wind (KpH)</p>
-        <p>${currentData.windData.speed_kph}</p>
-      </div>
-      <div>
-        <p>Cloud Cover (%)</p>
-        <p>${currentData.cloud}</p>
-      </div>
-      <div>
-        <p>Pressure (mb)</p>
-        <p>${currentData.pressure}</p>
-      </div>
-    </div>
   `;
+  currentRow.appendChild(getCurrentRowSecondaryContent());
   fragment.appendChild(currentRow);
   appBody.appendChild(fragment);
+}
+
+function getCurrentRowSecondaryContent() {
+  const currentData = AppData.getCurrentWeatherData();
+  const tempUnit = AppData.temperatureType === "celsius" ? "ºC" : "ºF";
+  const secondaryContent = [
+    {
+      icon: "/feelsLike.svg",
+      name: "Feels like",
+      data: currentData.feelsLike,
+      unit: tempUnit,
+    },
+    {
+      icon: "/humidity.svg",
+      name: "Humidity",
+      data: currentData.humidity,
+      unit: "%",
+    },
+    {
+      icon: "/cloud.svg",
+      name: "Cloud",
+      data: currentData.cloud,
+      unit: "%",
+    },
+    {
+      icon: "/rain.svg",
+      name: "Rain",
+      data: currentData.precipitation,
+      unit: "mm",
+    },
+    {
+      icon: "/wind.svg",
+      name: `Wind (${currentData.windData.degree}º)`,
+      data: currentData.windData.speed_kph,
+      unit: "KpH",
+    },
+  ];
+
+  const secondaryContainer = document.createElement("div");
+  secondaryContainer.classList.add("current-secondary");
+  for (const content of secondaryContent) {
+    const cell = getSecondaryContentCell(
+      content.icon,
+      content.name,
+      content.data,
+      content.unit
+    );
+    secondaryContainer.appendChild(cell);
+  }
+
+  return secondaryContainer;
+}
+
+function getSecondaryContentCell(iconSrc, name, data, units) {
+  const cell = document.createElement("div");
+  cell.classList.add("current-secondary-cell");
+  const icon = new Image();
+  icon.src = iconSrc;
+  cell.appendChild(icon);
+
+  const info = document.createElement("div");
+  info.innerHTML = `
+    <p>${name}</p>
+    <p>
+      <span class="numeric-data">${data}</span>
+      <span class="unit">${units}</span>
+    </p>
+  `;
+  cell.appendChild(info);
+  return cell;
 }
 
 function renderForecastWeekTable() {

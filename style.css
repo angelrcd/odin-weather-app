@@ -8,6 +8,7 @@
 } */
 
 :root {
+  --font-color: #030712;
   --primary-color : #EA6D4A;
   --background-main : #343A40;
   --background-secondary : #F5F7FD;
@@ -22,6 +23,7 @@
 html, body {
   height: 100%;
   font-family: 'Roboto', sans-serif;
+  color: var(--font-color);
 }
 body {
   line-height: 1.5;
@@ -179,11 +181,19 @@ h2 {
   margin-bottom: 2rem;
 }
 
+.numeric-data {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.unit {
+  color: var(--background-main);
+}
+
 /* Current row */
 .main-row {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-around;
+  align-items: center;
   gap: calc(10vw);
   padding: 0 calc(10vw);
   margin-bottom: 2rem;
@@ -200,8 +210,8 @@ h2 {
   font-weight: 600;
 }
 
-.current-temp-container span {
-  color: var(--background-main);
+.current-temp-container * {
+  flex-shrink: 0;
 }
 
 .current-condition-text{
@@ -210,33 +220,31 @@ h2 {
 
 .current-secondary {
   flex-grow: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
-}
-
-.current-secondary div {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
 }
 
-.current-secondary p {
-  width: fit-content;
-  margin: 0 auto;
+.current-secondary-cell {
+  display: flex;
+  gap: 10px;
+  font-size: 1.3rem;
+  line-break: strict;
 }
 
-.current-secondary p:nth-child(2) {
-  font-size: 1.5rem;
+.current-secondary-cell img {
+  height: 4rem;
 }
 
-/* @media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   .main-row {
     flex-direction: column;
     align-items: center;
   }
-} */
+}
 
 /* Forecast week table */
 .week-info-row {
