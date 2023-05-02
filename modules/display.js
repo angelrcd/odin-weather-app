@@ -30,12 +30,14 @@ function renderCurrentInfoRow() {
   currentRow.classList.add("main-row");
   currentRow.innerHTML = `
     <div class="current-main">
+      <h3>${locationData.name}</h3>
+      <div class="current-temp-container">
+        <p>${currentData.temperature}<span>${tempUnit}</span></p>
+        <img src="${currentData.condition.icon}" alt="">
+      </div>
+      <p class="current-condition-text">${currentData.condition.text}</p>
       <p>${locationData.getCurrentDate()}</p>
-      <h2>${locationData.name}</h2>
-      <img src="${currentData.condition.icon}" alt="">
-      <p>${currentData.temperature}${tempUnit}</p>
-      <p>feels like: ${currentData.feelsLike}${tempUnit}</p>
-      <p>${currentData.condition.text}</p>
+      <p>${locationData.getCurrentHour()}</p>
     </div>
     <div class="current-secondary">
       <div>
@@ -110,6 +112,11 @@ function renderForecastWeekTable() {
   const weekForecastSection = document.createElement("section");
   weekForecastSection.classList.add("week-info-row");
   weekForecastSection.appendChild(table);
+
+  const rowTitle = document.createElement("h2");
+  rowTitle.innerText = "Week forecast";
+
+  appBody.appendChild(rowTitle);
   appBody.appendChild(weekForecastSection);
 }
 
@@ -129,9 +136,9 @@ function getDataDayTableRow(dataDay) {
   tRow.insertCell().innerText = dataDay.rainChance;
   tRow.insertCell().innerText = dataDay.snowChance;
   tRow.insertCell().innerText = dataDay.avgHumidity;
-  tRow.insertCell().innerText = dataDay.minTemp;
-  tRow.insertCell().innerText = dataDay.avgTemp;
-  tRow.insertCell().innerText = dataDay.maxTemp;
+  tRow.insertCell().innerText = Number(dataDay.minTemp).toFixed(1);
+  tRow.insertCell().innerText = Number(dataDay.avgTemp).toFixed(1);
+  tRow.insertCell().innerText = Number(dataDay.maxTemp).toFixed(1);
 
   return tRow;
 }

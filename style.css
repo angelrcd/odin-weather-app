@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Roboto:ital,wght@0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
 /*
   Josh's Custom CSS Reset
   https://www.joshwcomeau.com/css/custom-css-reset/
@@ -20,6 +21,7 @@
 }
 html, body {
   height: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 body {
   line-height: 1.5;
@@ -172,18 +174,38 @@ header {
   transition: 0.3s ease all;
 }
 
+h2 {
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
 /* Current row */
 .main-row {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   gap: calc(10vw);
   padding: 0 calc(10vw);
   margin-bottom: 2rem;
 }
 
-.current-main {
+.current-main h3{
+  font-size: 1.7rem;
+}
+
+.current-temp-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  font-size: 2.3rem;
+  font-weight: 600;
+}
+
+.current-temp-container span {
+  color: var(--background-main);
+}
+
+.current-condition-text{
+  font-size: 1.5rem;
 }
 
 .current-secondary {
@@ -209,12 +231,12 @@ header {
   font-size: 1.5rem;
 }
 
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
   .main-row {
     flex-direction: column;
     align-items: center;
   }
-}
+} */
 
 /* Forecast week table */
 .week-info-row {
@@ -224,6 +246,7 @@ header {
 .week-forecast-table {
   width: 90%;
   margin: 0 auto;
+  margin-bottom: 3rem;
   border-right: 1px solid #cbd5e1;
   border-collapse: collapse;
 }
@@ -245,6 +268,7 @@ th:not(.empty-cell) {
 
 .week-forecast-table td {
   border: 1px solid #cbd5e1;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
     /* Cells alignment */

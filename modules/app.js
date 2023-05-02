@@ -49,11 +49,15 @@ class LocationData {
     this.name = locationFetchData.name;
     this.region = locationFetchData.region;
     this.country = locationFetchData.country;
-    this.localTime = dayjs.unix(locationFetchData.localtime_epoch);
+    this.localTime = locationFetchData.localtime;
   }
 
   getCurrentDate() {
-    return this.localTime.format("DD MMMM, dddd");
+    return this.localTime.slice(0, 10);
+  }
+
+  getCurrentHour() {
+    return this.localTime.slice(11);
   }
 }
 
