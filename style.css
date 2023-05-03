@@ -45,6 +45,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 header {
+  height: 100px;
   display: flex;
   gap: 1rem ;
   align-items: center;
@@ -54,10 +55,13 @@ header {
 }
 
 .search-bar-container {
+  width: 50vw;
   display: flex;
 }
 
 .search-bar-container input {
+  flex-grow: 1;
+  min-width: 0px;
   padding: 0.5rem 0.8rem;
   background: var(--background-secondary);
   border: 1px solid lightgray;
@@ -240,9 +244,21 @@ h2 {
 }
 
 @media only screen and (max-width: 600px) {
+  .toggle-button-cover {
+    display: none;
+  }
+
+  .search-bar-container {
+    width: 70vw;
+  }
+
   .main-row {
     flex-direction: column;
     align-items: center;
+  }
+
+  html {
+    font-size: 0.9em;
   }
 }
 
