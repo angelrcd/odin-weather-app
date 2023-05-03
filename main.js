@@ -15,7 +15,7 @@ async function getWeatherForecast(location) {
   };
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=21be9b60ca504f4396b165818232904&q=${location}&days=7&aqi=no&alerts=no`,
+      `https://api.weatherapi.com/v1/forecast.json?key=21be9b60ca504f4396b165818232904&q=${location}&days=7&aqi=no&alerts=no`,
       fetchOptions
     );
     const data = await response.json();
