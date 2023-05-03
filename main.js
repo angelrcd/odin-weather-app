@@ -2,7 +2,7 @@ import { AppData } from "./modules/app";
 import renderDisplay from "./modules/display";
 import LocalStorageController from "./modules/localStorageController";
 import { InfoPerHourController } from "./modules/displayInfoPerHour";
-import getSuggestions from "./modules/fetchLocationSuggestions";
+import { getSuggestions } from "./modules/fetchLocationSuggestions";
 
 const searchInput = document.querySelector(".search-bar-container input");
 const searchButton = document.querySelector(".search-bar-container button");
