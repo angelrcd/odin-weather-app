@@ -53,31 +53,31 @@ function getCurrentRowSecondaryContent() {
   const tempUnit = AppData.temperatureType === "celsius" ? "ºC" : "ºF";
   const secondaryContent = [
     {
-      icon: "/feelsLike.svg",
+      icon: "feelsLike.svg",
       name: "Feels like",
       data: currentData.feelsLike,
       unit: tempUnit,
     },
     {
-      icon: "/humidity.svg",
+      icon: "humidity.svg",
       name: "Humidity",
       data: currentData.humidity,
       unit: "%",
     },
     {
-      icon: "/cloud.svg",
+      icon: "cloud.svg",
       name: "Cloud",
       data: currentData.cloud,
       unit: "%",
     },
     {
-      icon: "/rain.svg",
+      icon: "rain.svg",
       name: "Rain",
       data: currentData.precipitation,
       unit: "mm",
     },
     {
-      icon: "/wind.svg",
+      icon: "wind.svg",
       name: `Wind (${currentData.windData.degree}º)`,
       data: currentData.windData.speed_kph,
       unit: "KpH",
