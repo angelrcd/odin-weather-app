@@ -36,7 +36,9 @@ function renderCurrentInfoRow() {
           <span class="numeric-data">${currentData.temperature}</span>
           <span class="unit">${tempUnit}</span>
         </p>
-        <img src="${currentData.condition.icon}" alt="">
+        <img src="${currentData.condition.icon}" alt=${
+    currentData.condition.text
+  }>
       </div>
       <p class="current-condition-text">${currentData.condition.text}</p>
       <p>${locationData.getCurrentDate()}</p>
@@ -104,6 +106,7 @@ function getSecondaryContentCell(iconSrc, name, data, units) {
   cell.classList.add("current-secondary-cell");
   const icon = new Image();
   icon.src = iconSrc;
+  icon.alt = name + " icon";
   cell.appendChild(icon);
 
   const info = document.createElement("div");
