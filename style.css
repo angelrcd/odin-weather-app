@@ -15,6 +15,7 @@
   --background-secondary-darker : #ebedf3;
   --color-cold : #1e40af;
   --color-hot : #dc2626;
+  --footer-height: calc(1rem + 18px);
 }
 
 * {
@@ -44,6 +45,11 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 header {
   display: flex;
   gap: 1rem ;
@@ -51,6 +57,29 @@ header {
   background: var(--background-main);
   padding: 0 2rem;
   margin-bottom: 2rem;
+}
+
+footer {
+  display: flex;
+  margin-top: auto;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  background: var(--background-main);
+  height: var(--footer-height);
+  border-top: 1px solid #555;
+}
+
+footer a,
+footer a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover,
+footer a:focus {
+  text-decoration: underline;
 }
 
 .search-bar-container {
